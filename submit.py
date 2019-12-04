@@ -6,7 +6,9 @@ def submit(category,tags,text_id):
     ret = json.loads(res)
     ret = json.loads(ret['data'])
     rid = ret['recs'][0]['rid']
-    res = gp.Update(db=db_name,rid=rid,new_record={'category':category,'confirm':1},modify_all=False,record_format='json')
+    tags_set = set(tags)
+    tags_list = ','.join(tags_set)
+    res = gp.Update(db=db_name,rid=rid,new_record={'category':category,'confirm':1,'keywords':tags_list},modify_all=False,record_format='json')
     db_name = "category_tag"
     res = gp.Select(db_name,pattern={'col':['category'],'val':[category]},ret_col=['keywords'])
     ret = json.loads(res)
@@ -16,7 +18,7 @@ def submit(category,tags,text_id):
     if len(keyword_list[0]) == 0:
         keyword_list = list()
     keyword_set = set(keyword_list)
-    tags_set = set(tags)
+    
     keyword_set |= tags_set
     keyword = ','.join(keyword_set)
     keywords = {"keywords":keyword}
