@@ -13,4 +13,4 @@ def delete(text_id):
     res = gp.Update(db=db_name,rid=rid,new_record={'confirm':0},modify_all=False,record_format='json')
     return res
     
-print(delete('cb981edc-16c1-11ea-ba07-2c4d54c22a5f'))
+#print(delete('cb981edc-16c1-11ea-ba07-2c4d54c22a5f'))
