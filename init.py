@@ -2,10 +2,13 @@ import gaipy as gp
 import json
 def init():
     db_name = "category_tag"
-    res = gp.Select(db=db_name,ret_col=['category'])
+    res = gp.Select(db=db_name,ret_col=['category'],page_cnt=50)
     ret = json.loads(res)
     ret = json.loads(ret['data'])
-    keyword_list = ret['recs'][0]['rec']['category'].split(',')
+    keyword_list = []
+    for i in range(len(ret['recs'])):
+        keyword_list.append(ret['recs'][i]['rec']['category'])
+    
     return keyword_list
 def get_document():
     db_name = "doc_tag"
