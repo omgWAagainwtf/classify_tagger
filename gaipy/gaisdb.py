@@ -150,7 +150,7 @@ def Select(db, pattern={}, filter_args={},ret_col=[] ,mode='', page_cnt=10, page
         cmd = domain + 'query?db=%s&p=%s&ps=%s&out=json' % (db, page, page_cnt)
 
         if type(pattern) == dict and len(pattern) != 0 :
-            cmd += '&q=%s' % __build_query(db, pattern)
+            cmd += '&pat=%s' % __build_query(db, pattern)
 
         if mode in match_mode :
             cmd += '&matchmode=%s' % mode

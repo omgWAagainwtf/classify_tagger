@@ -12,14 +12,17 @@ def init():
     return keyword_list
 def get_document():
     db_name = "doc_tag"
-    res = gp.Select(db=db_name,filter_args={'col':["confirm"],"val":["0"]},page=1,page_cnt=10)
+    res = gp.Select(db=db_name,pattern={'col':["confirm"],"val":["0"]},page=1,page_cnt=1)
     ret = json.loads(res)
     ret = json.loads(ret['data'])
+    #print(ret)
+    if ret['cnt'] == 0:
+        return "no document left"
     document = ret['recs'][0]['rec']['content']
     keywords = ret['recs'][0]['rec']['keywords'].split(',')
     category = ret['recs'][0]['rec']['category']
     text_id = ret['recs'][0]['rec']['text_id']
     confirm = ret['recs'][0]['rec']['confirm']
     return {"text":document,"tag":keywords,"category":category,"text_id":text_id,"confirm":str(confirm)}
-print(get_document())
-print(init())
+#print(get_document())
+#print(init())
