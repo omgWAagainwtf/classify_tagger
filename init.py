@@ -35,6 +35,6 @@ def get_status():
     ret = json.loads(ret['data'])
     total = ret['cnt']
     return(tagged,total)
-get_status()
+#get_status()
 #print(get_document())
 #print(init())
