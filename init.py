@@ -24,5 +24,17 @@ def get_document():
     text_id = ret['recs'][0]['rec']['text_id']
     confirm = ret['recs'][0]['rec']['confirm']
     return {"text":document,"tag":keywords,"category":category,"text_id":text_id,"confirm":str(confirm)}
+def get_status():
+    db_name = "doc_tag"
+    res = gp.Select(db=db_name,pattern={'col':["confirm"],"val":["1"]})
+    ret = json.loads(res)
+    ret = json.loads(ret['data'])
+    tagged = ret['cnt']
+    res = gp.Select(db=db_name)
+    ret = json.loads(res)
+    ret = json.loads(ret['data'])
+    total = ret['cnt']
+    return(tagged,total)
+get_status()
 #print(get_document())
 #print(init())
